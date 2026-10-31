@@ -12,6 +12,32 @@ The crab logo, product icons, badges, banners and colours of [Crustates](https:/
 | `png/` | PNG exports for places that can't use SVG (favicons, app icons, avatars, social images, badges) |
 | `generator/` | `build_brand.py`, the script that draws everything from code, and the fonts it needs |
 
+Download the latest kit as a zip from the [Releases page](https://github.com/crustates/brand/releases/latest).
+
+## Product icons
+
+| Tide | Reef | Current | Molt | Cast | Barnacle | Spawn |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| <img src="svg/icon-tide.svg" width="80" alt="Tide"> | <img src="svg/icon-reef.svg" width="80" alt="Reef"> | <img src="svg/icon-current.svg" width="80" alt="Current"> | <img src="svg/icon-molt.svg" width="80" alt="Molt"> | <img src="svg/icon-cast.svg" width="80" alt="Cast"> | <img src="svg/icon-barnacle.svg" width="80" alt="Barnacle"> | <img src="svg/icon-spawn.svg" width="80" alt="Spawn"> |
+
+## Badges
+
+Show that your project runs on or integrates with Crustates:
+
+![Runs on Crustates](svg/badge-runs-on.svg)
+
+```md
+[![Runs on Crustates](https://raw.githubusercontent.com/crustates/brand/main/svg/badge-runs-on.svg)](https://crustates.eu)
+```
+
+![Powered by Crustates](svg/badge-powered-by.svg)
+
+```md
+[![Powered by Crustates](https://raw.githubusercontent.com/crustates/brand/main/svg/badge-powered-by.svg)](https://crustates.eu)
+```
+
+More badges (products, open source, self-hosted) are in `svg/badge-*.svg`.
+
 ## Products and colours
 
 | Name | Area | Colour | Text on it |
@@ -31,10 +57,16 @@ Base colours: ink `#111111`, cream `#FFF6E5`. Fonts: Space Grotesk (headings and
 ## Regenerate
 
 ```sh
-pip install cairosvg uharfbuzz fonttools
+pip install -r generator/requirements.txt
 python generator/build_brand.py generator/fonts out
 ```
 
-## Licence and use
+CI checks that `svg/` matches the generator output, so change the code, not the SVGs. The reference is Linux: on macOS the two emblem SVGs can differ in the last digit of some coordinates.
 
-The files are licensed under [CC BY 4.0](LICENSE). The name "Crustates" and the crab are trademarks: see [TRADEMARK.md](TRADEMARK.md) for what that means in practice. The fonts in `generator/fonts` are under the SIL Open Font License 1.1.
+## Using the brand
+
+Write about Crustates, show the logo unmodified and add the badges to projects that run on it. Don't ship a fork or a product under the name or the crab. [TRADEMARK.md](TRADEMARK.md) has the details.
+
+## Licence
+
+The files are licensed under [CC BY 4.0](LICENSE). The name "Crustates" and the crab are trademarks: see [TRADEMARK.md](TRADEMARK.md). The fonts in `generator/fonts` are under the [SIL Open Font License 1.1](generator/fonts/OFL.txt).
