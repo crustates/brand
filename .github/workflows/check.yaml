@@ -1,0 +1,40 @@
+# Provides the required status check `check` on main (ruleset protect-main).
+# Keep the job id `check`: renaming it blocks every merge until the ruleset is
+# updated as well.
+#
+# Runs on Linux on purpose: macOS rounds the last digit of some emblem
+# coordinates differently, so svg/ is generated on Linux.
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+
+      - name: Install generator dependencies
+        run: pip install -r generator/requirements.txt
+
+      - name: Generate
+        run: python generator/build_brand.py generator/fonts out
+
+      - name: SVGs match the generator
+        run: diff -r out/svg svg
+
+      # PNG bytes depend on the renderer version, so only the file names count.
+      - name: Every PNG exists
+        run: diff <(ls out/png) <(ls png)
